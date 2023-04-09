@@ -27,12 +27,12 @@ namespace VkNet.Utils
 		public int MaxCaptchaRecognitionCount { get; set; } = 3;
 
 		/// <inheritdoc />
-		public T Perform<T>(Func<ulong?, string, T> action)
+		public T Perform<T>(Func<ulong?, string, T> action, ulong? captchaSid = null, string captchaKey = null)
 		{
 			var numberOfRemainingAttemptsToSolveCaptcha = MaxCaptchaRecognitionCount;
 			var numberOfRemainingAttemptsToAuthorize = MaxCaptchaRecognitionCount + 1;
-			ulong? captchaSidTemp = null;
-			string captchaKeyTemp = null;
+			ulong? captchaSidTemp = captchaSid;
+			string captchaKeyTemp = captchaKey;
 			var callCompleted = false;
 			var result = default(T);
 
